@@ -88,8 +88,12 @@ class DetailMovieActivity : AppCompatActivity(), CategoryItemAdapter.OnItemClick
                     } else {
                         binding.tvSinopsisDetail.text = responseDetailMovie.overview
                     }
-                    Picasso.get().load("https://image.tmdb.org/t/p/original/${responseDetailMovie.backdropPath}").into(binding.image)
-                    Picasso.get().setIndicatorsEnabled(false)
+                    if (responseDetailMovie.backdropPath == null) {
+                        binding.image.isGone = true
+                    } else {
+                        Picasso.get().load("https://image.tmdb.org/t/p/original/${responseDetailMovie.backdropPath}").into(binding.image)
+                        Picasso.get().setIndicatorsEnabled(false)
+                    }
                 }
             }
         }
@@ -147,7 +151,6 @@ class DetailMovieActivity : AppCompatActivity(), CategoryItemAdapter.OnItemClick
                         startActivity(intent)
                     }
                 }
-
             }
         }
     }
